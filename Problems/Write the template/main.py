@@ -1,0 +1,3 @@
+import re
+
+template = 'I?i?w?e? love P......?3?'
