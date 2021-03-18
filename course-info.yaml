@@ -9,5 +9,6 @@ summary: Machine learning is getting crazy smart these days. You've probably rea
   <a href="https://hyperskill.org">https://hyperskill.org/projects/134</a>
 programming_language: Python
 content:
+- Text Generator
 - Problems
 mode: Study
