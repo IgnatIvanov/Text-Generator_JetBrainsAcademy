@@ -3,6 +3,7 @@ from nltk.tokenize import WhitespaceTokenizer
 from nltk.util import bigrams
 import nltk
 import random
+import re
 from collections import Counter
 
 nltk.download('punkt')
@@ -94,13 +95,31 @@ for bigram in bigrams_collection:
 
 # _________________________GENERATING RANDOM TEXT_________________________
 
+# print([token for token in tokens if re.match(r'[A-Z][a-z]+\Z', token) is not None])
+# # print([re.match(r'[A-Z][a-z]+', token).string for token in tokens])
+# try:
+#     print([re.match(r'[A-Z][a-z]+', token).string for token in tokens])
+# except AttributeError:
+#     pass
+
 for i in range(10):
-    first_word = random.choice(tokens)
+    first_word = random.choice([token for token in tokens if re.match(r'[A-Z][a-z]+\Z', token) is not None])
     head = first_word
     sentence = []
     sentence += [first_word]
-    for x in range(9):
+    for x in range(3):
         sentence += random.choices(list(dict(markov_dict[head]).keys()), list(dict(markov_dict[head]).values()))
         head = sentence[len(sentence) - 1]
+    exit_flag = False
+    while exit_flag is not True:
+        sentence += random.choices(list(dict(markov_dict[head]).keys()), list(dict(markov_dict[head]).values()))
+        head = sentence[len(sentence) - 1]
+        if str(head).endswith('.'):
+            exit_flag = True
+        elif str(head).endswith('!'):
+            exit_flag = True
+        elif str(head).endswith('?'):
+            exit_flag = True
+        # print(head)
     print(*sentence)
     # print('')
